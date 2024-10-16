@@ -13,9 +13,7 @@ export enum BUTTON_TYPE_CLASSES {
   inverted = 'inverted',
 }
 
-const getButton = (
-  buttonType = BUTTON_TYPE_CLASSES.base
-): typeof BaseButton | typeof GoogleSignInButton | typeof InvertedButton =>
+const getButton = (buttonType = BUTTON_TYPE_CLASSES.base): typeof BaseButton =>
   ({
     [BUTTON_TYPE_CLASSES.base]: BaseButton,
     [BUTTON_TYPE_CLASSES.google]: GoogleSignInButton,
@@ -34,7 +32,6 @@ const Button: FC<ButtonProps> = ({
   ...otherProps
 }) => {
   const CustomButton = getButton(buttonType);
-
   return (
     <CustomButton disabled={isLoading} {...otherProps}>
       {isLoading ? <ButtonSpinner /> : children}
